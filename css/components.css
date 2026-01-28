@@ -1,0 +1,345 @@
+/* ============================
+   MODALS
+   ============================ */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 2000;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: -1;
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Close Button */
+.modal-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.modal-close:hover {
+    color: var(--accent);
+    background-color: var(--bg-tertiary);
+    border-radius: 0.5rem;
+}
+
+.modal-close svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* ============================
+   CV MODAL SPECIFIC
+   ============================ */
+
+.modal-cv .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+}
+
+.cv-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+/* ============================
+   GAME MODAL SPECIFIC
+   ============================ */
+
+.game-modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 0;
+}
+
+.game-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.game-modal-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.game-modal-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: 0.5rem 1rem;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.control-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.control-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.control-spacer {
+    flex: 1;
+}
+
+.control-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.game-iframe-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+#game-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ============================
+   GRID LAYOUTS
+   ============================ */
+
+.grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* ============================
+   HERO SECTION
+   ============================ */
+
+.hero {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border-radius: 1rem;
+    padding: var(--spacing-2xl);
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.hero-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent);
+    margin: 0 auto var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+}
+
+.hero-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ============================
+   TIMELINE
+   ============================ */
+
+.timeline {
+    position: relative;
+    padding: var(--spacing-lg) 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), transparent);
+}
+
+.timeline-item {
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    width: calc(50% - var(--spacing-lg));
+}
+
+.timeline-item:nth-child(odd) {
+    margin-left: 0;
+    text-align: right;
+    padding-right: var(--spacing-lg);
+}
+
+.timeline-item:nth-child(even) {
+    margin-left: 50%;
+    padding-left: var(--spacing-lg);
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent);
+    border: 3px solid var(--bg-primary);
+    border-radius: 50%;
+    top: 0;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: calc(-20px - 6px);
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: calc(-20px - 6px);
+}
+
+.timeline-content {
+    background-color: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+}
+
+/* ============================
+   SKILL TAGS
+   ============================ */
+
+.skill-tag {
+    display: inline-block;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    font-size: 0.9rem;
+    margin: 0.25rem;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.skill-tag:hover {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* ============================
+   SIDEBAR OVERLAY (MOBILE)
+   ============================ */
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 900;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}

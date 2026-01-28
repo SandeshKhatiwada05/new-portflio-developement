@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sandesh Khatiwada - Backend Developer exploring ML & Automation. Professional portfolio with projects, skills, and interactive games.">
+    <meta name="theme-color" content="#37353E">
+    <meta property="og:title" content="Sandesh Khatiwada - Developer Portfolio">
+    <meta property="og:description" content="Backend Developer | ML & Automation | Full-Stack">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="sources/My Image.jpg">
+    <link rel="icon" href="sources/icon.jpeg" type="image/jpeg">
+    
+    <title>Sandesh Khatiwada - Developer Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================
+           CSS VARIABLES & THEME SYSTEM
+           ============================ */
+        :root {
+            /* DARK THEME (default) */
+            --bg-primary: #37353E;
+            --bg-secondary: #44444E;
+            --bg-tertiary: #715A5A;
+            --bg-card: #44444E;
+            --text-primary: #D3DAD9;
+            --text-secondary: rgb(211, 218, 217);
+            --text-muted: rgba(211, 218, 217, 0.7);
+            --accent: #715A5A;
+            --accent-hover: #8a7070;
+            --border: rgba(211, 218, 217, 0.1);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.light-theme {
+            /* LIGHT THEME */
+            --bg-primary: #F9F8F6;
+            --bg-secondary: #EFE9E3;
+            --bg-tertiary: #D9CFC7;
+            --bg-card: #EFE9E3;
+            --text-primary: #37353E;
+            --text-secondary: #715A5A;
+            --text-muted: rgba(55, 53, 62, 0.7);
+            --accent: #C9B59C;
+            --accent-hover: #b5a188;
+            --border: rgba(55, 53, 62, 0.1);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ============================
+           UNIVERSAL RESET
+           ============================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============================
+           TYPOGRAPHY
+           ============================ */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+
+        p { color: var(--text-secondary); margin-bottom: 1rem; }
+        a { color: var(--accent); text-decoration: none; transition: var(--transition); }
+        a:hover { color: var(--accent-hover); }
+
+        code, pre { font-family: 'Fira Code', monospace; }
+
+        /* ============================
+           LAYOUT: MAIN GRID
+           ============================ */
+        body {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+
+        /* ============================
+           SIDEBAR
+           ============================ */
+        .sidebar {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+
+        .brand-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .brand-icon:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-hover);
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0 1rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transform: translateX(4px);
+        }
+
+        .nav-item.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            stroke-width: 2;
+        }
+
+        /* ============================
+           TOPBAR
+           ============================ */
+        .topbar {
+            grid-column: 2;
+            grid-row: 1;
+            position: sticky;
+            top: 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            gap: 1rem;
+            z-index: 90;
+            height: 70px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .topbar-spacer {
+            flex: 1;
+        }
+
+        .topbar-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .icon-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ============================
+           MAIN CONTENT
+           ============================ */
+        main {
+            grid-column: 2;
+            grid-row: 2;
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================
+           TIMELINE (Learning Journey)
+           ============================ */
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent), var(--accent-hover));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 100px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 27px;
+            top: 8px;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================
+           GRID LAYOUTS
+           ============================ */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+        /* ============================
+           CARDS
+           ============================ */
+        .card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ============================
+           SKILLS
+           ============================ */
+        .skill-group {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-group-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list li:before {
+            content: "▹";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ============================
+           PROJECTS
+           ============================ */
+        .project-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .project-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+        }
+
+        .project-link {
+            color: var(--accent);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            color: var(--accent-hover);
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid var(--border);
+        }
+
+        /* ============================
+           GAMES
+           ============================ */
+        .games-container {
+            margin-top: 2rem;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .game-card-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .game-card-content {
+            padding: 1.5rem;
+        }
+
+        .game-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .game-card-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-play {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-play:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        /* ============================
+           MODALS
+           ============================ */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            max-width: 1200px;
+            width: 90%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlideUp 0.3s ease;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .modal-close svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        #game-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+
+        .modal-controls {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            align-items: center;
+        }
+
+        .control-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .control-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .control-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .modal-spacer {
+            flex: 1;
+        }
+
+        .modal-info {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* FULLSCREEN CV MODAL */
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-primary);
+            display: none;
+            flex-direction: column;
+            z-index: 2000;
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+        }
+
+        .fullscreen-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .fullscreen-close:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .fullscreen-close svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .fullscreen-header {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border);
+            text-align: center;
+        }
+
+        .fullscreen-title {
+            font-size: 2rem;
+            color: var(--text-primary);
+        }
+
+        .fullscreen-body {
+            flex: 1;
+            overflow: auto;
+            padding: 2rem;
+        }
+
+        .cv-iframe {
+            width: 100%;
+            height: 100%;
+            min-height: calc(100vh - 200px);
+            border: none;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ============================
+           SIDEBAR OVERLAY (Mobile)
+           ============================ */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ============================
+           FOOTER
+           ============================ */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ============================
+           RESPONSIVE DESIGN
+           ============================ */
+        @media (max-width: 768px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                height: 100vh;
+                width: 260px;
+                z-index: 100;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .topbar {
+                grid-column: 1;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            main {
+                grid-column: 1;
+                padding: 2rem 1rem;
+            }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+
+            .timeline-item {
+                padding-left: 80px;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-marker {
+                left: 17px;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .topbar {
+                padding: 1rem;
+            }
+
+            .topbar-actions {
+                gap: 0.5rem;
+            }
+
+            .icon-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-controls {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+
+            .control-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            #game-iframe {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <img src="sources/icon.jpeg" alt="Brand" class="brand-icon">
+        </div>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="#" class="nav-item active" data-page="home">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Home</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-page="skills">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <span>Skills</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-page="projects">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                        <polyline points="13 2 13 9 20 9"></polyline>
+                    </svg>
+                    <span>Projects</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-page="games">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                        <polyline points="17 2 12 7 7 2"></polyline>
+                    </svg>
+                    <span>Games</span>
+                </a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="topbar-spacer"></div>
+        <div class="topbar-actions">
+            <!-- Theme Toggle - Transparent moon (dark) / Moon facing down (light) -->
+            <button class="icon-btn theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light theme">
+                <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+            <!-- CV Button - Document icon -->
+            <button class="icon-btn" id="cv-btn" title="View CV" aria-label="Open CV modal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+            </button>
+
+            <!-- GitHub Link -->
+            <a href="https://github.com/SandeshKhatiwada05" target="_blank" rel="noopener noreferrer" class="icon-btn" title="GitHub" aria-label="Visit GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+        <!-- Content will be inserted here by JavaScript -->
+    </main>
+
+    <!-- CV MODAL - Full Viewport -->
+    <div class="modal fullscreen-modal" id="cv-modal">
+        <button class="fullscreen-close" id="cv-close" aria-label="Close CV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="fullscreen-header">
+            <h2 class="fullscreen-title">Curriculum Vitae</h2>
+        </div>
+        <div class="fullscreen-body">
+            <iframe src="sources/Sandesh_CV.pdf" class="cv-iframe" title="CV Document"></iframe>
+        </div>
+    </div>
+
+    <!-- GAME MODAL -->
+    <div class="modal" id="game-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="game-title">Game</h2>
+                <button class="modal-close" id="game-close" aria-label="Close game">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-controls">
+                <button class="control-btn" id="fullscreen-btn" title="Fullscreen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                    </svg>
+                    <span>Fullscreen</span>
+                </button>
+                <button class="control-btn" id="mute-btn" title="Mute">
+                    <svg class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    <span class="mute-text">Mute</span>
+                </button>
+                <button class="control-btn" id="reload-btn" title="Reload Game">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    <span>Reload</span>
+                </button>
+                <div class="modal-spacer"></div>
+                <div class="modal-info">Powered by MadKid Games</div>
+            </div>
+            <div class="modal-body">
+                <iframe id="game-iframe" src="" allowfullscreen sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-presentation"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIDEBAR OVERLAY (Mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <script>
+        /* ============================
+           CONFIGURATION & DATA
+           Easy to edit and extend!
+           ============================ */
+        const CONFIG = {
+            games: [
+                {
+                    id: 'royal-battletown',
+                    title: 'Royal Battletown: GTA Game',
+                    description: 'Open-world action chaos, GTA style',
+                    embedUrl: 'https://www.madkidgames.com/full/royal-battletown-gta-game',
+                    icon: '🚗'
+                },
+                {
+                    id: 'granny',
+                    title: 'Granny',
+                    description: 'Survival horror puzzle adventure',
+                    embedUrl: 'https://www.madkidgames.com/full/granny',
+                    icon: '👵'
+                },
+                {
+                    id: 'motorcycle-simulator',
+                    title: 'Ultimate Motorcycle Simulator',
+                    description: 'Realistic bike riding experience',
+                    embedUrl: 'https://www.madkidgames.com/full/ultimate-motorcycle-simulator',
+                    icon: '🏍️'
+                },
+                {
+                    id: 'bike-race',
+                    title: 'Bike Race: Racing Game',
+                    description: 'Fast-paced competitive racing',
+                    embedUrl: 'https://www.madkidgames.com/full/bike-race-racing-game',
+                    icon: '🚴'
+                },
+                {
+                    id: 'ninja-samurai',
+                    title: 'Ninja Samurai: Action RPG Survival',
+                    description: 'Combat-driven action adventure',
+                    embedUrl: 'https://www.madkidgames.com/full/ninja-samurai-action-rpg-survival',
+                    icon: '🗡️'
+                },
+                {
+                    id: 'temple-rider',
+                    title: 'Temple Rider: BMX Racing 3D',
+                    description: 'Extreme BMX stunts and racing',
+                    embedUrl: 'https://www.madkidgames.com/full/temple-rider-bmx-racing-3d',
+                    icon: '🚲'
+                },
+                {
+                    id: 'tower-crush',
+                    title: 'Tower Crush – Defense TD',
+                    description: 'Strategic tower defense gameplay',
+                    embedUrl: 'https://www.madkidgames.com/full/tower-crush-defense-td',
+                    icon: '🏰'
+                }
+            ],
+            
+            skills: {
+                'Languages': ['Java', 'Python', 'C++', 'C#', 'JavaScript', 'PHP'],
+                'Backend & Frameworks': ['Spring Boot', 'Django', 'Flask', '.NET', 'Node.js'],
+                'Databases': ['MySQL', 'PostgreSQL', 'MongoDB', 'CockroachDB'],
+                'Cloud & DevOps': ['Microsoft Azure', 'Git', 'Maven', 'Docker', 'Linux'],
+                'Big Data & ML': ['Apache Hadoop', 'Jupyter Notebook', 'n8n', 'Python ML'],
+                'Tools & Testing': ['JUnit', 'SonarQube', 'Figma', 'VS Code']
+            },
+            
+            projects: [
+                {
+                    title: 'Spring Boot Microservices',
+                    description: 'Scalable backend system using Spring Boot with JPA, Security, and PostgreSQL for enterprise applications.',
+                    tags: ['Spring Boot', 'Java', 'PostgreSQL', 'Microservices'],
+                    github: 'https://github.com/SandeshKhatiwada05'
+                },
+                {
+                    title: 'ML Data Pipeline',
+                    description: 'Automated ETL pipeline using Python, Jupyter Notebook, and Apache Hadoop for big data processing.',
+                    tags: ['Python', 'ML', 'Hadoop', 'Data Engineering'],
+                    github: 'https://github.com/SandeshKhatiwada05'
+                },
+                {
+                    title: 'Full-Stack Web Application',
+                    description: 'Modern responsive web app with React frontend and .NET backend, featuring dark/light theme support.',
+                    tags: ['React', '.NET', 'JavaScript', 'Full-Stack'],
+                    github: 'https://github.com/SandeshKhatiwada05'
+                },
+                {
+                    title: 'Cloud Infrastructure Setup',
+                    description: 'Azure VMs, App Services, and networking setup with infrastructure as code principles and automation.',
+                    tags: ['Azure', 'Cloud', 'DevOps', 'Infrastructure'],
+                    github: 'https://github.com/SandeshKhatiwada05'
+                }
+            ],
+            
+            timeline: [
+                {
+                    year: '2022',
+                    title: 'Started University Journey',
+                    description: 'Began Bachelor of Information Technology at Federation University, diving deep into programming fundamentals and software development.'
+                },
+                {
+                    year: '2023',
+                    title: 'Java & Backend Development',
+                    description: 'Mastered Java programming, Spring Boot framework, and began building scalable backend systems with PostgreSQL and microservices architecture.'
+                },
+                {
+                    year: '2024',
+                    title: 'ML & Cloud Technologies',
+                    description: 'Explored machine learning with Python, Jupyter Notebook, and Apache Hadoop. Started working with Microsoft Azure cloud services and automation tools like n8n.'
+                },
+                {
+                    year: '2025',
+                    title: 'Full-Stack & Advanced Systems',
+                    description: 'Expanded to full-stack development with React, .NET, and advanced cloud infrastructure. Built production-ready applications with CI/CD pipelines.'
+                },
+                {
+                    year: '2026',
+                    title: 'Graduation & Professional Growth',
+                    description: 'Graduating with comprehensive experience in backend development, ML automation, cloud services, and modern full-stack applications. Ready to make an impact.'
+                }
+            ]
+        };
+
+        /* ============================
+           PAGE TEMPLATES
+           ============================ */
+        function renderHome() {
+            return `
+                <section class="section">
+                    <h1 class="section-title">Sandesh Khatiwada</h1>
+                    <p class="section-subtitle">Backend Developer | ML & Automation</p>
+                    
+                    <p style="max-width: 800px; margin-bottom: 3rem;">
+                        Backend developer exploring advanced backend development with Spring Boot alongside machine learning and automation. 
+                        Hands-on experience building Java systems using Spring Data JPA, Spring Security, and PostgreSQL. 
+                        Worked on AI/automation projects with Python, Jupyter, and n8n. 
+                        Familiar with multiple languages (Java, Python, C#, JavaScript), cloud platforms (Azure), and containerization (Docker).
+                    </p>
+
+                    <h2 class="section-title" style="margin-top: 3rem;">My Learning Journey</h2>
+                    <p class="section-subtitle">From university beginnings to professional development (2022-2026)</p>
+                    
+                    <div class="timeline-container">
+                        <div class="timeline-line"></div>
+                        ${CONFIG.timeline.map(item => `
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-year">${item.year}</div>
+                                <div class="timeline-content">
+                                    <h3 class="timeline-title">${item.title}</h3>
+                                    <p class="timeline-desc">${item.description}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+                <footer>
+                    <p>© 2026 Sandesh Khatiwada | <a href="https://github.com/SandeshKhatiwada05">GitHub</a></p>
+                </footer>
+            `;
+        }
+
+        function renderSkills() {
+            return `
+                <section class="section">
+                    <h1 class="section-title">Skills & Expertise</h1>
+                    <p class="section-subtitle">Key technologies and specializations</p>
+                    
+                    <div class="grid grid-3">
+                        ${Object.entries(CONFIG.skills).map(([category, items]) => `
+                            <div class="skill-group">
+                                <h3 class="skill-group-title">${category}</h3>
+                                <ul class="skill-list">
+                                    ${items.map(skill => `<li>${skill}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+                <footer>
+                    <p>© 2026 Sandesh Khatiwada | <a href="https://github.com/SandeshKhatiwada05">GitHub</a></p>
+                </footer>
+            `;
+        }
+
+        function renderProjects() {
+            return `
+                <section class="section">
+                    <h1 class="section-title">Projects</h1>
+                    <p class="section-subtitle">Recent work and notable projects</p>
+                    
+                    ${CONFIG.projects.map(project => `
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3 class="project-title">${project.title}</h3>
+                                <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
+                            </div>
+                            <p class="project-desc">${project.description}</p>
+                            <div class="tag-list">
+                                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </section>
+                <footer>
+                    <p>© 2026 Sandesh Khatiwada | <a href="https://github.com/SandeshKhatiwada05">GitHub</a></p>
+                </footer>
+            `;
+        }
+
+        function renderGames() {
+            return `
+                <section class="section">
+                    <h1 class="section-title">Play Games</h1>
+                    <p class="section-subtitle">Interactive HTML5 games. Click any game to play!</p>
+                    
+                    <div class="games-container">
+                        <div class="grid grid-4">
+                            ${CONFIG.games.map(game => `
+                                <div class="game-card" onclick="openGame('${game.id}')">
+                                    <div class="game-card-image">${game.icon}</div>
+                                    <div class="game-card-content">
+                                        <h3 class="game-card-title">${game.title}</h3>
+                                        <p class="game-card-desc">${game.description}</p>
+                                        <button class="btn-play">Play Game</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+                <footer>
+                    <p>© 2026 Sandesh Khatiwada | <a href="https://github.com/SandeshKhatiwada05">GitHub</a></p>
+                </footer>
+            `;
+        }
+
+        /* ============================
+           APP LOGIC
+           ============================ */
+        const mainContent = document.getElementById('main-content');
+        const sidebar = document.getElementById('sidebar');
+        const hamburger = document.getElementById('hamburger');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        let currentPage = 'home';
+
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = item.dataset.page;
+                navigate(page);
+            });
+        });
+
+        function navigate(page) {
+            currentPage = page;
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelector(`[data-page="${page}"]`).classList.add('active');
+
+            switch(page) {
+                case 'skills':
+                    mainContent.innerHTML = renderSkills();
+                    break;
+                case 'projects':
+                    mainContent.innerHTML = renderProjects();
+                    break;
+                case 'games':
+                    mainContent.innerHTML = renderGames();
+                    break;
+                default:
+                    mainContent.innerHTML = renderHome();
+            }
+
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            hamburger.classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Hamburger menu
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+
+        // CV Modal
+        document.getElementById('cv-btn').addEventListener('click', () => {
+            document.getElementById('cv-modal').classList.add('active');
+            body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('cv-close').addEventListener('click', () => {
+            document.getElementById('cv-modal').classList.remove('active');
+            body.style.overflow = '';
+        });
+
+        // Game Modal
+        function openGame(gameId) {
+            const game = CONFIG.games.find(g => g.id === gameId);
+            if (!game) return;
+            
+            document.getElementById('game-title').textContent = game.title;
+            document.getElementById('game-iframe').src = game.embedUrl;
+            document.getElementById('game-modal').classList.add('active');
+            body.style.overflow = 'hidden';
+        }
+
+        document.getElementById('game-close').addEventListener('click', () => {
+            document.getElementById('game-modal').classList.remove('active');
+            document.getElementById('game-iframe').src = '';
+            body.style.overflow = '';
+        });
+
+        // Game controls
+        document.getElementById('fullscreen-btn').addEventListener('click', () => {
+            const iframe = document.getElementById('game-iframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            }
+        });
+
+        document.getElementById('mute-btn').addEventListener('click', function() {
+            const muteText = this.querySelector('.mute-text');
+            const volumeIcon = this.querySelector('.volume-icon');
+            
+            if (muteText.textContent === 'Mute') {
+                muteText.textContent = 'Unmute';
+                volumeIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+            } else {
+                muteText.textContent = 'Mute';
+                volumeIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+            }
+        });
+
+        document.getElementById('reload-btn').addEventListener('click', () => {
+            const iframe = document.getElementById('game-iframe');
+            iframe.src = iframe.src;
+        });
+
+        // Theme toggle
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark-theme');
+            body.classList.remove('dark-theme', 'light-theme');
+            body.classList.add(isDark ? 'light-theme' : 'dark-theme');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            updateThemeIcon();
+        });
+
+        function updateThemeIcon() {
+            const isDark = body.classList.contains('dark-theme');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            
+            if (isDark) {
+                // Transparent moon for dark mode
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            } else {
+                // Moon facing down for light mode
+                themeIcon.innerHTML = '<path d="M3 11.21A9 9 0 1 0 12.79 21 7 7 0 0 1 3 11.21z"></path>';
+            }
+        }
+
+        // Load theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+            body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
+        }
+        
+        updateThemeIcon();
+
+        // Close modals on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('cv-modal').classList.remove('active');
+                document.getElementById('game-modal').classList.remove('active');
+                document.getElementById('game-iframe').src = '';
+                body.style.overflow = '';
+            }
+        });
+
+        // Initialize
+        navigate('home');
+    </script>
+</body>
+</html>
